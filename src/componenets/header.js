@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import { View } from 'react-native';
 
-const Header = ({ timer, setTimer }) => {
+const Header = ({ input, setInput }) => {
   return (
     <View style={ styles.header }>
       <Text style={ styles.title }>
@@ -12,10 +12,10 @@ const Header = ({ timer, setTimer }) => {
       <TextInput
         multiline={ true }
         style={ styles.input }
-        onChangeText={text => setTimer({ ...timer, input: text})}
-        value={ timer.input }
-        placeholder={"Enter description..."}
-        placeholderTextColor="#dfe7e8"
+        onChangeText={text => setInput(text)}
+        value={ input }
+        placeholder={"Enter a description..."}
+        placeholderTextColor="#dfe7e899"
       />
     </View>
   )

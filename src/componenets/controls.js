@@ -2,68 +2,38 @@ import React from 'react'
 import { Image } from 'expo-image'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 
+import { startTracking, logTime } from '../utils/functions'
+
 import PlayImg from '../../assets/icons/play.svg'
 import PauseImg from '../../assets/icons/pause.svg'
 import TrashImg from '../../assets/icons/trash-2.svg'
 
-const startTimer = (timer, setTimer) => {
-  setTimer({ ...timer, startTime: new Date() })
-}
-
-const ignoreTask = (setTimer) => {
-  let endTime = new Date()
-  setTimer({ startTime: endTime, input: '' })
-}
-
-const restartTimer = (setTimer, timer, log, setLog) => {
-  let endTime = new Date(),
-      timeDiff = endTime - timer.startTime
-      timeDiff /= 1000
-
-  const secs = Math.round(timeDiff),
-        mins = Math.round(secs / 60),
-        hours = Math.round(secs / 3600),
-        logName = timer.input === '' ? `Log ${ log.length + 1 }` : timer.input
-
-  setLog((log) => [ ...log, `${logName} - ${hours}:${mins}`])
-  setTimer({ startTime: endTime, input: '' })
-}
-
-const Controls = ({ timer, setTimer, log, setLog }) => {
+const Controls = ({ input, setInput, log, setLog }) => {
   return (
     <View style={ styles.btn_container }>
       {
-        timer.startTime === null
+        log.length === 0
         ? (
           <TouchableOpacity
             style={[ styles.btn, styles.start_btn ]}
-            onPress={ () => startTimer(timer, setTimer) }
+            onPress={ () => startTracking(log, setLog) }
           >
-            <Image
-              source={ PlayImg }
-              style={ styles.btn_icon }
-            />
+            <Image source={ PlayImg } style={ styles.btn_icon } />
           </TouchableOpacity>
         )
         : (
           <>
             <TouchableOpacity
               style={[ styles.btn, styles.secc_btn ]}
-              onPress={ () => ignoreTask(setTimer) }
+              onPress={ () => null }
             >
-              <Image
-                source={ TrashImg }
-                style={ styles.btn_icon }
-              />
+              <Image source={ TrashImg } style={ styles.btn_icon } />
             </TouchableOpacity>
             <TouchableOpacity
               style={[ styles.btn, styles.main_btn ]}
-              onPress={ () => restartTimer(setTimer, timer, log, setLog) }
+              onPress={ () => logTime(input, setInput, log, setLog) }
             >
-              <Image
-                source={ PauseImg }
-                style={ styles.btn_icon }
-              />
+              <Image source={ PauseImg } style={ styles.btn_icon } />
             </TouchableOpacity>
           </>
         )

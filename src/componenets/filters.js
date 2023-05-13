@@ -7,23 +7,17 @@ import FilterImg from '../../assets/icons/filter.svg'
 const Filters = () => {
   return (
     <View style={ styles.btn_container }>
-      <TouchableOpacity
-        style={ styles.btn }
-      >
+      <TouchableOpacity style={ styles.btn }>
         <Image source={ FilterImg } style={ styles.btn_icon } />
-        <Text style={ styles.btn_txt }>Fltr 1</Text>
+        <Text style={ styles.btn_txt }>Chronological</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[ styles.btn, styles.btn_margin ]}
-      >
+      <TouchableOpacity style={[ styles.btn, styles.btn_margin ]}>
         <Image source={ FilterImg } style={ styles.btn_icon } />
-        <Text style={ styles.btn_txt }>Fltr 2</Text>
+        <Text style={ styles.btn_txt }>Grouped</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={ styles.btn }
-      >
+      <TouchableOpacity style={ styles.btn }>
         <Image source={ FilterImg } style={ styles.btn_icon } />
-        <Text style={ styles.btn_txt }>Fltr 3</Text>
+        <Text style={ styles.btn_txt }>Summary</Text>
       </TouchableOpacity>
     </View>
   )
@@ -58,11 +52,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 4
   },
   btn_txt: {
+    fontSize: 12,
     color: '#fff'
   },
   btn_icon: {
-    height: 16,
-    width: 16
+    height: 12,
+    width: 12
   }
 })
 

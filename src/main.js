@@ -5,20 +5,22 @@ import { StyleSheet, View } from 'react-native';
 import Header from './componenets/header';
 import Controls from './componenets/controls';
 import List from './componenets/list';
+import Start from './componenets/start';
 
 const Main = () => {
 
-  const reset = { startTime: null, input: '' }
-  const [ timer, setTimer ] = useState(reset)
+  const [ input, setInput ] = useState('')
   const [ log, setLog ] = useState([])
 
   return (
     <View style={ styles.container }>
-      <Header timer={ timer } setTimer={ setTimer } />
+      <Header input={ input } setInput={ setInput } />
       {
-        log.length ? <List log={ log } /> : null
+        log.length > 1
+        ? <List log={ log } />
+        : <Start />
       }
-      <Controls timer={ timer } setTimer={ setTimer } log={ log } setLog={ setLog } />
+      <Controls input={ input } setInput={ setInput } log={ log } setLog={ setLog } />
       {<StatusBar style="auto" />}
     </View>
   );
