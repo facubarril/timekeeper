@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   list_item_text: {
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: 26,
     color: '#dfe7e8'
   },

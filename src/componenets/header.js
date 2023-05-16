@@ -2,13 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import { View } from 'react-native';
+import TimeViewer from './timeViewer';
 
-const Header = ({ input, setInput }) => {
+const Header = ({ log, input, setInput }) => {
   return (
     <View style={ styles.header }>
-      <Text style={ styles.title }>
-        TIME/Keeper
-      </Text>
+      <View style={ styles.title_container }>
+        <Text style={ styles.title }>
+          TIME/Keeper
+        </Text>
+        <TimeViewer log={ log } />
+      </View>
       <TextInput
         multiline={ true }
         style={ styles.input }
@@ -26,6 +30,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#151722',
     paddingTop: Constants.statusBarHeight + 10,
+  },
+  title_container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end'
   },
   title: {
     fontWeight: '700',

@@ -14,14 +14,14 @@ const Main = () => {
 
   return (
     <View style={ styles.container }>
-      <Header input={ input } setInput={ setInput } />
+      <StatusBar style="light" />
+      <Header log={ log } input={ input } setInput={ setInput } />
       {
         log.length > 1
         ? <List log={ log } />
         : <Start />
       }
       <Controls input={ input } setInput={ setInput } log={ log } setLog={ setLog } />
-      {<StatusBar style="auto" />}
     </View>
   );
 }
