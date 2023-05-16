@@ -4,39 +4,28 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native'
 
 import { startTracking, logTime } from '../utils/functions'
 
-import PlayImg from '../../assets/icons/play.svg'
-import PauseImg from '../../assets/icons/pause.svg'
-import TrashImg from '../../assets/icons/trash-2.svg'
+import PlayIcon from '../../assets/icons/play.svg'
+import PauseIcon from '../../assets/icons/pause.svg'
+import SettingsIcon from '../../assets/icons/settings.svg'
 
 const Controls = ({ input, setInput, log, setLog }) => {
   return (
     <View style={ styles.btn_container }>
       {
-        log.length === 0
-        ? (
+        <>
           <TouchableOpacity
-            style={[ styles.btn, styles.start_btn ]}
-            onPress={ () => startTracking(log, setLog) }
+            style={[ styles.btn, log.length === 0 ? styles.start_btn : styles.main_btn ]}
+            onPress={ () => log.length === 0 ? startTracking(log, setLog) : logTime(input, setInput, log, setLog) }
           >
-            <Image source={ PlayImg } style={ styles.btn_icon } />
+            <Image source={ log.length === 0 ? PlayIcon : PauseIcon } style={ styles.btn_icon } />
           </TouchableOpacity>
-        )
-        : (
-          <>
-            <TouchableOpacity
-              style={[ styles.btn, styles.secc_btn ]}
-              onPress={ () => null }
-            >
-              <Image source={ TrashImg } style={ styles.btn_icon } />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[ styles.btn, styles.main_btn ]}
-              onPress={ () => logTime(input, setInput, log, setLog) }
-            >
-              <Image source={ PauseImg } style={ styles.btn_icon } />
-            </TouchableOpacity>
-          </>
-        )
+          <TouchableOpacity
+            style={[ styles.btn, styles.secc_btn ]}
+            onPress={ () => null }
+          >
+            <Image source={ SettingsIcon } style={ styles.btn_icon } />
+          </TouchableOpacity>
+        </>
       }
     </View>
   )
@@ -67,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     height: 80,
-    width: '100%',
+    width: '80%'
   },
   start_btn: {
     backgroundColor: '#50b2c0'
@@ -75,7 +64,6 @@ const styles = StyleSheet.create({
   main_btn: {
     marginLeft: 4,
     borderBottomLeftRadius: 4,
-    width: '80%',
     backgroundColor: '#FF4000'
   },
   secc_btn: {

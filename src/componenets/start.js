@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image'
 
-import PlayImg from '../../assets/icons/play.svg'
-import PauseImg from '../../assets/icons/pause.svg'
-import TrashImg from '../../assets/icons/trash-2.svg'
-import FilterImg from '../../assets/icons/filter.svg'
+import PlayIcon from '../../assets/icons/play.svg'
+import PauseIcon from '../../assets/icons/pause.svg'
+import SettingsIcon from '../../assets/icons/settings.svg'
+import FilterIcon from '../../assets/icons/filter.svg'
 
 const Start = () => {
   return (
@@ -12,9 +12,10 @@ const Start = () => {
       <Text style={ styles.start_text }>
         Wellcome to TIME/Keeper{'\n'}
         This app keeps tracking of your elapsed time from the moment you start it.{'\n\n'}
-        Tap {<Image source={ PlayImg } style={ styles.btn_icon } />} to start tracking.{'\n'}
-        Tap {<Image source={ PauseImg } style={ styles.btn_icon } />} to add a log with current description and restart the tracking.{'\n\n'}
-        Once you have an entry on your log, you will see it here. Use {<Image source={ FilterImg } style={ styles.btn_icon } />} Filters to arrange them as needed.
+        Tap {<Image source={ PlayIcon } style={ styles.btn_icon } />} to start tracking.{'\n'}
+        Tap {<Image source={ PauseIcon } style={ styles.btn_icon } />} to add a log with current description and restart the tracking.{'\n\n'}
+        Once you have an entry on your log, you will see it here. Use {<Image source={ FilterIcon } style={ styles.btn_icon } />} Filters to arrange them as needed.{'\n\n'}
+        You can tap {<Image source={ SettingsIcon } style={ styles.btn_icon } />} to display app settings at any moment.
       </Text>
     </View>
   )
