@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 import { View } from 'react-native';
 import TimeViewer from './timeViewer';
 
-const Header = ({ log, input, setInput }) => {
+const Header = ({ log, input, setInput, config }) => {
   return (
     <View style={ styles.header }>
       <View style={ styles.title_container }>
@@ -13,14 +13,17 @@ const Header = ({ log, input, setInput }) => {
         </Text>
         <TimeViewer log={ log } />
       </View>
-      <TextInput
-        multiline={ true }
-        style={ styles.input }
-        onChangeText={text => setInput(text)}
-        value={ input }
-        placeholder={"Enter a description..."}
-        placeholderTextColor="#dfe7e899"
-      />
+      {
+        !config
+        && <TextInput
+            multiline={ true }
+            style={ styles.input }
+            onChangeText={text => setInput(text)}
+            value={ input }
+            placeholder={"Enter a description..."}
+            placeholderTextColor="#dfe7e899"
+          />
+      }
     </View>
   )
 }
@@ -32,6 +35,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight + 10,
   },
   title_container: {
+    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end'
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 36,
     paddingVertical: 6,
-    marginVertical: 10,
+    marginBottom: 10,
     color: '#dfe7e8',
     alignSelf: "flex-start"
   }

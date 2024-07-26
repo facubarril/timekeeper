@@ -1,4 +1,4 @@
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 import { Image } from 'expo-image'
 
 import PlayIcon from '../../assets/icons/play.svg'
@@ -15,7 +15,7 @@ const Start = () => {
         The tracked time will be displayed at the top-right corner of your screen.{'\n\n'}
         Whenever you want to add a log with the current description and restart the tracking, just tap {<Image source={ PauseIcon } style={ styles.btn_icon } />}. You can enter a description at any time before adding the log.{'\n\n'}
         Once you have entries in your log, they will appear here. You can use the {<Image source={ FilterIcon } style={ styles.btn_icon } />} Filters to arrange them as needed.{'\n\n'}
-        For app settings, adding recurrent task descriptions, and more, you can tap {<Image source={ SettingsIcon } style={ styles.btn_icon } />} at any time.{'\n\n'}
+        Toggle app settings, recurrent task descriptions, and more, by tapping {<Image source={ SettingsIcon } style={ styles.btn_icon } />} at any time.{'\n\n'}
         Enjoy effortlessly managing your time!
       </Text>
     </ScrollView>

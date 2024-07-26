@@ -6,22 +6,28 @@ import Header from './componenets/header';
 import Controls from './componenets/controls';
 import List from './componenets/list';
 import Start from './componenets/start';
+import Configs from './componenets/configs';
 
 const Main = () => {
 
+  const [ config, setConfig ] = useState(false)
   const [ input, setInput ] = useState('')
   const [ log, setLog ] = useState([])
 
   return (
     <View style={ styles.container }>
       <StatusBar style="light" />
-      <Header log={ log } input={ input } setInput={ setInput } />
+      <Header log={ log } input={ input } setInput={ setInput } config={ config }/>
       {
-        log.length > 1
-        ? <List log={ log } />
-        : <Start />
+        config
+        ? <Configs />
+        : (
+          log.length > 1
+          ? <List log={ log } />
+          : <Start />
+        )
       }
-      <Controls input={ input } setInput={ setInput } log={ log } setLog={ setLog } />
+      <Controls input={ input } setInput={ setInput } log={ log } setLog={ setLog } config={ config } setConfig={ setConfig } />
     </View>
   );
 }
