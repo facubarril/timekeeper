@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { saveLogToFile, readAndFilterLogs } from './utils/functions'
+import { saveLogToFile, readAndFilterLogs, saveSettings, loadSettings } from './utils/functions'
 
 import Header from './componenets/header';
 import Controls from './componenets/controls';
@@ -17,6 +17,7 @@ const Main = () => {
 
   /* States */
   const [ input, setInput ] = useState('')
+  const [ data, setData ] = useState([])
   const [ log, setLog ] = useState([])
   const [ newEntry, setNewEntry ] = useState('')
   const [ hasEntryToday, setHasEntryToday ] = useState(false)
@@ -27,16 +28,20 @@ const Main = () => {
   const [ filterMode, setFilterMode ] = useState(1)
 
   const readLogsFromFile = async () => {
-    const { filteredData, hasLogToday } = await readAndFilterLogs(midnight, listRange)
+    const { rawData, filteredData, hasLogToday } = await readAndFilterLogs(midnight, listRange)
     setHasEntryToday(hasLogToday)
     setLog(filteredData)
+    setData(rawData)
   };
 
-  useEffect(() => {  }, [])
+  useEffect(() => {
+    loadSettings(setMidnight, setListRange, setFilterMode);
+  }, []);
 
   useEffect(() => {
     readLogsFromFile()
-  }, [ listRange, midnight ])
+    saveSettings(midnight, listRange, filterMode)
+  }, [ listRange, midnight, filterMode ])
 
   useEffect(() => {
     if (newEntry !== '') {
@@ -48,7 +53,14 @@ const Main = () => {
   return (
     <View style={ styles.container }>
       <StatusBar style="light" />
-      <Header log={ log } hasEntryToday={ hasEntryToday } input={ input } setInput={ setInput } config={ config }/>
+      <Header
+        data={ data }
+        log={ log }
+        hasEntryToday={ hasEntryToday }
+        input={ input }
+        setInput={ setInput }
+        config={ config }
+      />
       {
         config
         ? <Configs

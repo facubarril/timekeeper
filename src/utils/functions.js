@@ -149,12 +149,45 @@ const readAndFilterLogs = async ( midnight, listRange ) => {
       return logDate >= startOfDay && logDate <= now;
     });
 
-    return { filteredData, hasLogToday };
+    return { rawData: logs, filteredData, hasLogToday };
 
   } catch (error) {
     console.error('Error reading log file:', error);
-    return { filteredData: [], hasLogToday: false };
+    return { rawData: logs, filteredData: [], hasLogToday: false };
   }
 }
 
-export { fileUrl, startTracking, saveLogToFile, logTime, setViewerTime, startViewerTrack, getTimeDif, getFormatedDate, readAndFilterLogs }
+/*
+** Save used configurations
+** used in src/main
+**/
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const saveSettings = async (midnight, listRange, filterMode) => {
+  try {
+    await AsyncStorage.setItem('midnight', midnight);
+    await AsyncStorage.setItem('listRange', listRange);
+    await AsyncStorage.setItem('filterMode', filterMode.toString());
+  } catch (error) {
+    console.error('Error saving settings:', error);
+  }
+};
+
+/*
+** Load user configurations
+** used in src/main
+**/
+const loadSettings = async (setMidnight, setListRange, setFilterMode) => {
+  try {
+    const savedMidnight = await AsyncStorage.getItem('midnight');
+    const savedListRange = await AsyncStorage.getItem('listRange');
+    const savedFilterMode = await AsyncStorage.getItem('filterMode');
+
+    if (savedMidnight !== null) setMidnight(savedMidnight);
+    if (savedListRange !== null) setListRange(savedListRange);
+    if (savedFilterMode !== null) setFilterMode(parseInt(savedFilterMode, 10));
+  } catch (error) {
+    console.error('Error loading settings:', error);
+  }
+};
+
+export { fileUrl, startTracking, saveLogToFile, logTime, setViewerTime, startViewerTrack, getTimeDif, getFormatedDate, readAndFilterLogs, saveSettings, loadSettings }
